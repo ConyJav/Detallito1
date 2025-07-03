@@ -6,7 +6,7 @@ body {
     min-height: 100vh;
     margin: 0;
     font-family: 'Dancing Script', cursive;
-    color: #2c3e50;
+    color: #2c3e50; /* Azul oscuro */
 }
 
 .container {
@@ -16,59 +16,73 @@ body {
     height: 90vh;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     border-radius: 25px;
-    overflow: hidden; /* Importante para el clipping inicial */
+    overflow: hidden;
 }
 
 /* Base styles for both blocks */
 .left-block, .right-block {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Default to column for content centering */
     justify-content: center;
     align-items: center;
     padding: 20px;
     text-align: center;
-    /* Transiciones para suavizar los cambios de estilo */
-    transition: all 0.5s ease-out;
-    border-radius: 25px; /* Bordes redondeados por defecto */
+    transition: all 0.5s ease-out; /* Smooth transitions for all properties */
+    border-radius: 25px; /* Default rounded borders */
+    box-sizing: border-box; /* Include padding in element's total width/height */
 }
 
-/* Specific styles for the left block (menu) */
+/* Specific styles for the left block (menu) - Desktop state by default (hidden) */
 .left-block {
     background-color: #add8e6;
     color: #2c3e50;
-    width: 0; /* Hidden by default */
+    width: 0; /* Hidden by default on desktop */
     overflow: hidden;
     padding: 0; /* No padding when hidden */
     opacity: 0; /* Fully transparent when hidden */
-    flex-shrink: 0;
-    /* Reset borders for the split view */
+    flex-shrink: 0; /* Prevents shrinking beyond content */
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
 
-/* Styles for the right block (main content) */
+/* Specific styles for the right block (main content) - Desktop state by default */
 .right-block {
-    flex: 1; /* Takes remaining space */
+    flex: 1; /* Takes all available space when left-block is hidden */
     background-image: radial-gradient(circle at 50% 50%, white 10%, #87ceeb 60%, #4682b4 100%);
     color: #2c3e50;
 }
 
-/* When left-block is visible (Desktop State) */
-.left-block.visible {
-    width: 50%;
-    padding: 20px;
-    opacity: 1;
+/* DESKTOP VIEW: When left-block is visible */
+@media (min-width: 769px) { /* Apply these styles only on screens larger than 768px */
+    .left-block.visible {
+        width: 50%; /* Takes 50% width */
+        padding: 20px; /* Restores padding */
+        opacity: 1; /* Becomes visible */
+        /* Restore specific border-radius for desktop split view */
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-top-left-radius: 25px; /* Ensure these are still rounded */
+        border-bottom-left-radius: 25px;
+    }
+
+    .left-block.visible + .right-block {
+        width: 50%; /* Right block also takes 50% */
+        background-image: none; /* No gradient */
+        background-color: #add8e6; /* Solid color matching left block */
+        color: #2c3e50;
+        /* Adjust borders for desktop split view */
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 25px; /* Ensure these are still rounded */
+        border-bottom-right-radius: 25px;
+    }
+
+    /* Ensure main-title is nowrap on desktop */
+    .main-title {
+        white-space: nowrap;
+    }
 }
 
-/* When left-block is visible, right-block adjusts (Desktop State) */
-.left-block.visible + .right-block {
-    width: 50%; /* Takes the other half */
-    background-image: none;
-    background-color: #add8e6;
-    color: #2c3e50;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-}
 
 /* --- Menu and List Styles --- */
 .menu-title {
@@ -99,7 +113,6 @@ body {
     font-size: 3.5em;
     font-weight: normal;
     text-align: center;
-    white-space: nowrap; /* Keep on one line for desktop */
     max-width: 100%;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -117,7 +130,7 @@ body {
 }
 
 .feeling-button {
-    background-color: #2c3e50;
+    background-color: #ff6347;
     color: white;
     border: none;
     padding: 18px 35px;
@@ -128,7 +141,7 @@ body {
 }
 
 .feeling-button:hover {
-    background-color: #507498;
+    background-color: #e5533d;
     transform: scale(1.05);
 }
 
@@ -197,7 +210,7 @@ body {
 }
 
 .modal-close-btn {
-    background-color: #2c3e50;
+    background-color: #ff6347;
     color: white;
     border: none;
     padding: 12px 25px;
@@ -248,121 +261,119 @@ body {
     100% { opacity: 1; transform: translateY(0); }
 }
 
-/* ********** MEDIA QUERIES PARA ADAPTARSE A PANTALLAS MÁS PEQUEÑAS (CELULARES) ********** */
-
+/* ********** MEDIA QUERIES PARA MÓVILES (max-width: 768px) ********** */
 @media (max-width: 768px) {
     .container {
-        flex-direction: column; /* Apila los bloques en columna */
-        height: auto; /* Altura automática */
+        flex-direction: column; /* Stack blocks vertically */
+        height: auto; /* Auto height for stacking */
         width: 98%;
         margin: 10px auto;
-        border-radius: 15px; /* Bordes más pequeños */
+        border-radius: 15px; /* Smaller container border radius */
     }
 
     .left-block, .right-block {
-        width: 100%; /* Ambos bloques ocupan el 100% */
+        width: 100%; /* Both blocks take full width on mobile */
         height: auto;
         padding: 15px;
-        border-radius: 15px; /* Bordes redondeados en ambos */
-        margin-bottom: 0; /* Elimina margen entre ellos por defecto */
-        box-sizing: border-box; /* Asegura que el padding no añada ancho extra */
+        border-radius: 15px; /* Consistent border radius */
+        margin-bottom: 0; /* No default margin between stacked blocks */
     }
 
+    /* MOBILE: Left block (menu) default state */
     .left-block {
-        order: 1; /* Asegura que el left-block vaya primero */
-        opacity: 0; /* Oculto por defecto en móvil */
-        height: 0; /* No ocupa espacio cuando está oculto */
-        padding: 0; /* Sin padding cuando oculto */
-        pointer-events: none; /* No clickable when hidden */
-        overflow: hidden; /* Hide content that might overflow */
-        /* Bordes redondeados para el bloque izquierdo cuando esté oculto */
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
+        order: 1; /* Menu appears first */
+        opacity: 0; /* Hidden */
+        height: 0; /* Takes no height */
+        padding: 0; /* No padding */
+        pointer-events: none; /* Not clickable when hidden */
+        overflow: hidden; /* Hide content */
+        /* Reset border radius for mobile */
+        border-radius: 15px;
+        margin-bottom: 0; /* Ensure no unwanted margin */
     }
 
+    /* MOBILE: Right block (main content) default state */
     .right-block {
-        order: 2; /* El right-block va debajo */
-        background-image: radial-gradient(circle at 50% 50%, white 10%, #87ceeb 60%, #4682b4 100%);
-        border-radius: 15px; /* Bordes redondeados para el right-block */
+        order: 2; /* Main content appears second */
+        background-image: radial-gradient(circle at 50% 50%, white 10%, #87ceeb 60%, #4682b4 100%); /* Original gradient */
+        border-radius: 15px; /* Consistent border radius */
+        margin-bottom: 10px; /* Add some space above the main content block if menu is visible above it */
     }
 
-    /* ESTADO VISIBLE DEL MENÚ EN MÓVIL */
+    /* MOBILE: When left-block (menu) is visible */
     .left-block.visible {
-        order: 1; /* Mantiene el orden si JS lo cambia */
         opacity: 1; /* Visible */
-        height: auto; /* Ocupa su altura natural */
-        padding: 20px; /* Restaura padding */
-        pointer-events: auto; /* Clickeable */
-        margin-bottom: 10px; /* Espacio entre el menú y el bloque de contenido */
-        border-bottom-left-radius: 15px;
-        border-bottom-right-radius: 15px;
+        height: auto; /* Takes natural height */
+        padding: 20px; /* Restores padding */
+        pointer-events: auto; /* Clickable */
+        /* Reset border-radius for when it's the visible block */
+        border-radius: 15px;
+        margin-bottom: 10px; /* Space below the menu when it's visible */
     }
 
-    /* Cuando left-block está visible, el right-block va debajo */
+    /* MOBILE: When left-block is visible, the right-block adjusts */
     .left-block.visible + .right-block {
-        order: 2;
-        background-image: none; /* Quita el degradado cuando el menú está visible */
-        background-color: #add8e6; /* Color sólido */
+        /* When menu is visible, right block can have different styles */
+        background-image: none; /* Remove gradient */
+        background-color: #add8e6; /* Solid color */
         color: #2c3e50;
-        border-radius: 15px; /* Restaura todos los bordes */
+        border-radius: 15px; /* Ensure all corners are rounded */
+        margin-top: 0; /* Ensure no extra space if the menu is now above it */
     }
 
 
-    /* Ajustes de tamaño de texto y elementos */
+    /* Adjust font sizes and margins for mobile */
     .main-title {
-        font-size: 2em; /* Título principal más pequeño */
-        white-space: normal; /* Permite que el texto se divida en varias líneas */
-        word-break: break-word; /* Rompe palabras largas */
+        font-size: 2.2em; /* Smaller title */
+        white-space: normal; /* Allow title to wrap */
+        word-break: break-word; /* Break long words */
         line-height: 1.2;
-        margin-top: 10px; /* Menos margen arriba */
-        margin-bottom: 10px; /* Menos margen abajo */
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 
     .menu-title {
-        font-size: 1.3em; /* Título del menú más pequeño */
+        font-size: 1.4em;
         margin-bottom: 15px;
     }
 
     .options-list {
-        font-size: 1em; /* Opciones de lista más pequeñas */
+        font-size: 1em;
     }
 
     .animated-bear {
-        width: 180px; /* Oso más pequeño */
+        width: 150px; /* Smaller bear */
         margin-bottom: 15px;
     }
 
     .feeling-button {
-        padding: 12px 25px; /* Botón más pequeño */
+        padding: 10px 20px; /* Smaller button */
         font-size: 1em;
     }
 
     .modal-content {
-        max-width: 95%; /* Modal más ancho en móvil */
+        max-width: 90%; /* Modal takes more width */
         padding: 15px;
     }
 
     .modal-message {
-        font-size: 1.3em;
+        font-size: 1.2em;
         margin-bottom: 15px;
     }
 
     .modal-gif {
-        width: 120px;
+        width: 100px;
     }
 
     .modal-close-btn {
-        padding: 10px 20px;
-        font-size: 0.9em;
+        padding: 8px 15px;
+        font-size: 0.8em;
     }
 }
 
 @media (max-width: 480px) {
-    /* Ajustes extra para teléfonos muy pequeños */
+    /* Further adjustments for very small phones */
     .main-title {
         font-size: 1.8em;
-    }
-    .animated-bear {
-        width: 150px;
     }
 }
