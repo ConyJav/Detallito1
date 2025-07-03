@@ -1,30 +1,25 @@
 body {
-    /* Fondo con un gradiente de azul claro */
     background: linear-gradient(to right, #e0f2f7, #c1e0e9);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
-
-    /* ********** FUENTE: Dancing Script para todo el body ********** */
-    font-family: 'Dancing Script', cursive; /* Usamos 'cursive' como respaldo genérico */
-    /* Color de texto por defecto para el contenido general (menú, etc.) */
-    color: #2c3e50; /* Azul oscuro para que coincida con la imagen de referencia */
-    /* ********************************************************************** */
+    font-family: 'Dancing Script', cursive;
+    color: #2c3e50;
 }
 
 .container {
     display: flex;
-    width: 95%; /* Aumentamos el ancho del contenedor */
-    max-width: 1200px; /* Añadimos un ancho máximo opcional */
-    height: 90vh; /* Aumentamos la altura del contenedor */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
-    border-radius: 25px; /* Bordes más redondeados para el contenedor principal */
-    overflow: hidden;
+    width: 95%;
+    max-width: 1200px;
+    height: 90vh;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 25px;
+    overflow: hidden; /* Importante para el clipping inicial */
 }
 
-/* Estilos base para ambos bloques para centrar su contenido */
+/* Base styles for both blocks */
 .left-block, .right-block {
     display: flex;
     flex-direction: column;
@@ -32,119 +27,114 @@ body {
     align-items: center;
     padding: 20px;
     text-align: center;
-    transition: width 0.5s ease-out, padding 0.5s ease-out, opacity 0.5s ease-out, background-color 0.5s ease-out; /* Añadimos transición para background-color */
-    border-radius: 25px; /* Bordes redondeados por defecto para ambos, si no hay otro específico */
+    /* Transiciones para suavizar los cambios de estilo */
+    transition: all 0.5s ease-out;
+    border-radius: 25px; /* Bordes redondeados por defecto */
 }
 
-/* Estilos específicos para el bloque izquierdo (oculto por defecto) */
+/* Specific styles for the left block (menu) */
 .left-block {
-    background-color: #add8e6; /* Azul claro para el estado visible */
-    color: #2c3e50; /* Cambiamos a azul oscuro para el texto del menú, como en la imagen de referencia */
-    width: 0; /* Empieza con ancho 0 */
+    background-color: #add8e6;
+    color: #2c3e50;
+    width: 0; /* Hidden by default */
     overflow: hidden;
-    padding: 0; /* Quita el padding inicial */
-    opacity: 0; /* Lo hace invisible */
-    flex-shrink: 0; /* Evita que se encoja más de lo necesario */
-    /* Bordes para cuando el contenedor tiene ambos bloques */
-    border-top-right-radius: 0; /* Quitamos redondez superior derecha */
-    border-bottom-right-radius: 0; /* Quitamos redondez inferior derecha */
+    padding: 0; /* No padding when hidden */
+    opacity: 0; /* Fully transparent when hidden */
+    flex-shrink: 0;
+    /* Reset borders for the split view */
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
-/* Estilos para el bloque izquierdo cuando está visible */
-.left-block.visible {
-    width: 50%; /* Cuando esté visible, ocupa la mitad del ancho del contenedor */
-    padding: 20px; /* Restaura el padding */
-    opacity: 1; /* Lo hace visible */
-}
-
-/* Estilos para el bloque derecho */
+/* Styles for the right block (main content) */
 .right-block {
-    flex: 1; /* Permite que el bloque derecho se expanda para llenar el espacio */
-    background-image: radial-gradient(circle at 50% 50%, white 10%, #87ceeb 60%, #4682b4 100%); /* Degradado inicial */
-    color: #2c3e50; /* Color del texto inicial para el right-block para que coincida con la imagen de referencia */
-    /* Bordes para cuando el contenedor tiene solo el right-block */
-    border-radius: 25px; /* Bordes redondeados cuando es el único visible */
+    flex: 1; /* Takes remaining space */
+    background-image: radial-gradient(circle at 50% 50%, white 10%, #87ceeb 60%, #4682b4 100%);
+    color: #2c3e50;
 }
 
-/* IMPORTANTE: Cuando left-block es visible, right-block también cambia */
-.left-block.visible + .right-block {
-    width: 50%; /* Cuando left-block está visible, right-block toma el 50% */
-    background-image: none; /* Quitamos el degradado */
-    background-color: #add8e6; /* Color sólido igual al left-block */
-    color: #2c3e50; /* Cambiamos el color del texto para que contraste con el nuevo fondo */
+/* When left-block is visible (Desktop State) */
+.left-block.visible {
+    width: 50%;
+    padding: 20px;
+    opacity: 1;
+}
 
-    /* Quitamos redondez superior izquierda y inferior izquierda */
+/* When left-block is visible, right-block adjusts (Desktop State) */
+.left-block.visible + .right-block {
+    width: 50%; /* Takes the other half */
+    background-image: none;
+    background-color: #add8e6;
+    color: #2c3e50;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
 
-/* --- Estilos del menú de opciones --- */
+/* --- Menu and List Styles --- */
 .menu-title {
-    font-size: 1.7em; /* Un poco más grande */
+    font-size: 1.7em;
     margin-bottom: 25px;
-    color: #2c3e50; /* Azul oscuro para el título del menú, como en la imagen de referencia */
+    color: #2c3e50;
 }
 
 .options-list {
-    list-style: none; /* Quita los puntos de la lista */
+    list-style: none;
     padding: 0;
     font-size: 1.2em;
 }
 
 .options-list li {
     margin-bottom: 12px;
-    cursor: pointer; /* Indica que son elementos clicables */
+    cursor: pointer;
     transition: color 0.3s ease;
 }
 
 .options-list li:hover {
-    color: #0056b3; /* Cambia de color al pasar el ratón */
+    color: #0056b3;
 }
 
-/* ********** ESTILOS PARA EL TÍTULO PRINCIPAL (PARA QUE ME RECUERDES) ********** */
-/* NOTA: Ahora el font-family lo hereda del body. */
+/* --- Main Title Styles --- */
 .main-title {
-    color: #2c3e50; /* Azul oscuro para el título, como en la imagen de referencia */
-    font-size: 3.5em; /* Aumentamos un poco el tamaño para un mejor impacto visual, ajústalo si es necesario */
-    font-weight: normal; /* Dancing Script tiene pesos de 400 a 700, pero el 400 es el más caligráfico */
+    color: #2c3e50;
+    font-size: 3.5em;
+    font-weight: normal;
     text-align: center;
-    white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
+    white-space: nowrap; /* Keep on one line for desktop */
     max-width: 100%;
     margin-top: 20px;
     margin-bottom: 20px;
-    text-shadow: none; /* Asegúrate de que no tenga sombra si no la quieres */
+    text-shadow: none;
 }
-/* ******************************************************************************** */
 
-/* --- Estilos para el contenedor del oso y el botón --- */
+/* --- Bear and Button Styles --- */
 .bear-container {
     margin-bottom: 40px;
 }
 
 .animated-bear {
-    width: 300px; /* Tamaño del GIF del osito */
+    width: 300px;
     height: auto;
 }
 
 .feeling-button {
-    background-color: #ff6347; /* Rojo tomate, un contraste llamativo */
+    background-color: #2c3e50;
     color: white;
     border: none;
-    padding: 18px 35px; /* Botón más grande */
+    padding: 18px 35px;
     font-size: 1.4em;
-    border-radius: 30px; /* Bordes más redondeados */
+    border-radius: 30px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .feeling-button:hover {
-    background-color: #e5533d;
-    transform: scale(1.05); /* Ligeramente más grande al pasar el ratón */
+    background-color: #507498;
+    transform: scale(1.05);
 }
 
-/* ********** ESTILOS DEL MODAL ********** */
+/* --- Modal Styles --- */
 .modal {
-    display: none; /* ¡Deja SOLO esta línea para ocultarlo por defecto! */
+    display: none;
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -153,13 +143,13 @@ body {
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.6);
-    justify-content: center; /* Estas dos líneas ayudan a centrar el modal-content */
-    align-items: center;    /* cuando el display se cambie a 'flex' en JS */
+    justify-content: center;
+    align-items: center;
 }
 
 .modal-content {
     background-color: #add8e6;
-    margin: auto; /* Esto también ayuda a centrar */
+    margin: auto;
     padding: 30px;
     border-radius: 25px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
@@ -192,7 +182,7 @@ body {
 
 .modal-message {
     font-size: 1.8em;
-    color: #2c3e50; /* Color del texto del modal para que contraste */
+    color: #2c3e50;
     margin-bottom: 25px;
 }
 
@@ -207,7 +197,7 @@ body {
 }
 
 .modal-close-btn {
-    background-color: #ff6347;
+    background-color: #2c3e50;
     color: white;
     border: none;
     padding: 12px 25px;
@@ -221,35 +211,27 @@ body {
     background-color: #e5533d;
     transform: scale(1.05);
 }
-/* ************************************************ */
 
-/* --- Estilos para la animación de caída del título --- */
-
-/* Es importante que los span sean inline-block para que las transformaciones funcionen bien */
+/* --- Title Animation Styles --- */
 .animated-title span {
     display: inline-block;
     position: relative;
-    opacity: 0; /* Oculto por defecto antes de la animación */
-    transform: translateY(-50px); /* Posición inicial "arriba" para que caiga */
-    animation: dropIn 0.8s forwards ease-out; /* Animación de caída */
-    /* Puedes ajustar la duración y la curva de aceleración */
+    opacity: 0;
+    transform: translateY(-50px);
+    animation: dropIn 0.8s forwards ease-out;
 }
 
-/* Define el retraso para cada letra */
 .animated-title span:nth-child(1) { animation-delay: 0.1s; }
 .animated-title span:nth-child(2) { animation-delay: 0.15s; }
 .animated-title span:nth-child(3) { animation-delay: 0.2s; }
 .animated-title span:nth-child(4) { animation-delay: 0.25s; }
-/* Espacio */
 .animated-title span:nth-child(5) { animation-delay: 0.3s; }
 .animated-title span:nth-child(6) { animation-delay: 0.35s; }
 .animated-title span:nth-child(7) { animation-delay: 0.4s; }
 .animated-title span:nth-child(8) { animation-delay: 0.45s; }
-/* Espacio */
 .animated-title span:nth-child(9) { animation-delay: 0.5s; }
 .animated-title span:nth-child(10) { animation-delay: 0.55s; }
 .animated-title span:nth-child(11) { animation-delay: 0.6s; }
-/* Espacio */
 .animated-title span:nth-child(12) { animation-delay: 0.65s; }
 .animated-title span:nth-child(13) { animation-delay: 0.7s; }
 .animated-title span:nth-child(14) { animation-delay: 0.75s; }
@@ -261,130 +243,126 @@ body {
 .animated-title span:nth-child(20) { animation-delay: 1.05s; }
 .animated-title span:nth-child(21) { animation-delay: 1.1s; }
 
-
-/* Keyframes para la animación de "caída" */
 @keyframes dropIn {
-    0% {
-        opacity: 0;
-        transform: translateY(-50px); /* Inicia 50px arriba */
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0); /* Termina en su posición normal */
-    }
+    0% { opacity: 0; transform: translateY(-50px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
-
 
 /* ********** MEDIA QUERIES PARA ADAPTARSE A PANTALLAS MÁS PEQUEÑAS (CELULARES) ********** */
 
 @media (max-width: 768px) {
-    /* Estilos que se aplicarán en pantallas de 768px o menos (tablets y celulares) */
-
     .container {
-        flex-direction: column; /* Cambia la dirección de los bloques a columna */
-        height: auto; /* Permite que la altura del contenedor se ajuste al contenido */
-        width: 98%; /* Ocupa casi todo el ancho disponible */
-        margin: 10px auto; /* Centra el contenedor con un poco de margen */
+        flex-direction: column; /* Apila los bloques en columna */
+        height: auto; /* Altura automática */
+        width: 98%;
+        margin: 10px auto;
+        border-radius: 15px; /* Bordes más pequeños */
     }
 
     .left-block, .right-block {
-        width: 100% !important; /* Ambos bloques ocupan el 100% del ancho */
-        height: auto; /* La altura se ajusta al contenido */
-        padding: 15px; /* Reduce un poco el padding */
-        border-radius: 15px; /* Ajusta los bordes redondeados */
+        width: 100%; /* Ambos bloques ocupan el 100% */
+        height: auto;
+        padding: 15px;
+        border-radius: 15px; /* Bordes redondeados en ambos */
+        margin-bottom: 0; /* Elimina margen entre ellos por defecto */
+        box-sizing: border-box; /* Asegura que el padding no añada ancho extra */
     }
 
     .left-block {
-        opacity: 1; /* Asegura que siempre esté visible en móviles si no hay JS para ocultarlo */
-        padding: 20px; /* Asegura padding para el contenido */
+        order: 1; /* Asegura que el left-block vaya primero */
+        opacity: 0; /* Oculto por defecto en móvil */
+        height: 0; /* No ocupa espacio cuando está oculto */
+        padding: 0; /* Sin padding cuando oculto */
+        pointer-events: none; /* No clickable when hidden */
+        overflow: hidden; /* Hide content that might overflow */
+        /* Bordes redondeados para el bloque izquierdo cuando esté oculto */
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
     }
 
+    .right-block {
+        order: 2; /* El right-block va debajo */
+        background-image: radial-gradient(circle at 50% 50%, white 10%, #87ceeb 60%, #4682b4 100%);
+        border-radius: 15px; /* Bordes redondeados para el right-block */
+    }
+
+    /* ESTADO VISIBLE DEL MENÚ EN MÓVIL */
     .left-block.visible {
-        /* Si el left-block está visible, no queremos que el right-block se encoja, sino que esté debajo */
-        width: 100%;
-    }
-
-    .left-block.visible + .right-block {
-        width: 100%; /* El right-block también al 100% */
-        margin-top: 20px; /* Añade un espacio entre los dos bloques */
-        background-color: #add8e6; /* Mantiene el color azul claro */
-        color: #2c3e50; /* Mantiene el color de texto */
-        border-top-left-radius: 15px; /* Restaura los bordes redondeados */
-        border-top-right-radius: 15px;
+        order: 1; /* Mantiene el orden si JS lo cambia */
+        opacity: 1; /* Visible */
+        height: auto; /* Ocupa su altura natural */
+        padding: 20px; /* Restaura padding */
+        pointer-events: auto; /* Clickeable */
+        margin-bottom: 10px; /* Espacio entre el menú y el bloque de contenido */
         border-bottom-left-radius: 15px;
         border-bottom-right-radius: 15px;
     }
 
+    /* Cuando left-block está visible, el right-block va debajo */
+    .left-block.visible + .right-block {
+        order: 2;
+        background-image: none; /* Quita el degradado cuando el menú está visible */
+        background-color: #add8e6; /* Color sólido */
+        color: #2c3e50;
+        border-radius: 15px; /* Restaura todos los bordes */
+    }
+
+
+    /* Ajustes de tamaño de texto y elementos */
     .main-title {
-        font-size: 2.5em; /* Reduce el tamaño del título principal */
-        white-space: normal; /* Permite que el texto se divida en varias líneas si es muy largo */
-        word-break: break-word; /* Asegura que palabras largas se rompan */
-        line-height: 1.2; /* Ajusta el espaciado entre líneas */
+        font-size: 2em; /* Título principal más pequeño */
+        white-space: normal; /* Permite que el texto se divida en varias líneas */
+        word-break: break-word; /* Rompe palabras largas */
+        line-height: 1.2;
+        margin-top: 10px; /* Menos margen arriba */
+        margin-bottom: 10px; /* Menos margen abajo */
     }
 
     .menu-title {
-        font-size: 1.5em; /* Reduce el tamaño del título del menú */
+        font-size: 1.3em; /* Título del menú más pequeño */
+        margin-bottom: 15px;
     }
 
     .options-list {
-        font-size: 1.1em; /* Reduce el tamaño de las opciones de la lista */
+        font-size: 1em; /* Opciones de lista más pequeñas */
     }
 
     .animated-bear {
-        width: 200px; /* Reduce el tamaño del oso en pantallas pequeñas */
-        margin-bottom: 20px; /* Ajusta el margen */
+        width: 180px; /* Oso más pequeño */
+        margin-bottom: 15px;
     }
 
     .feeling-button {
-        padding: 15px 30px; /* Reduce el tamaño del botón */
-        font-size: 1.2em;
+        padding: 12px 25px; /* Botón más pequeño */
+        font-size: 1em;
     }
 
-    /* Estilos para el modal en pantallas pequeñas */
     .modal-content {
-        max-width: 90%; /* El modal ocupa más ancho */
-        padding: 20px; /* Reduce el padding del modal */
+        max-width: 95%; /* Modal más ancho en móvil */
+        padding: 15px;
     }
 
     .modal-message {
-        font-size: 1.5em; /* Reduce el tamaño del mensaje del modal */
+        font-size: 1.3em;
+        margin-bottom: 15px;
     }
 
     .modal-gif {
-        width: 150px; /* Reduce el tamaño del GIF dentro del modal */
-        height: auto;
+        width: 120px;
     }
 
     .modal-close-btn {
         padding: 10px 20px;
-        font-size: 1em;
+        font-size: 0.9em;
     }
 }
 
 @media (max-width: 480px) {
-    /* Estilos adicionales para pantallas muy pequeñas (smartphones) */
+    /* Ajustes extra para teléfonos muy pequeños */
     .main-title {
-        font-size: 2em; /* Reduce aún más el título principal */
+        font-size: 1.8em;
     }
-
-    .menu-title {
-        font-size: 1.3em;
-    }
-
-    .options-list {
-        font-size: 1em;
-    }
-
     .animated-bear {
-        width: 150px; /* Oso aún más pequeño */
-    }
-
-    .feeling-button {
-        font-size: 1.1em;
-        padding: 12px 25px;
-    }
-
-    .modal-message {
-        font-size: 1.2em;
+        width: 150px;
     }
 }
