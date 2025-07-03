@@ -6,67 +6,63 @@ body {
     min-height: 100vh;
     margin: 0;
     font-family: 'Dancing Script', cursive;
-    color: #2c3e50; /* Azul oscuro */
+    color: #2c3e50;
 }
 
 .container {
-    display: flex; /* Flex container for the two blocks */
+    display: flex; 
     width: 95%;
     max-width: 1200px;
-    height: 90vh; /* Fixed height for desktop */
+    height: 90vh; 
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     border-radius: 25px;
-    overflow: hidden; /* Important for preventing content overflow during transitions */
+    overflow: hidden; 
 }
 
-/* Base styles for both blocks */
 .left-block, .right-block {
     display: flex;
-    flex-direction: column; /* Content inside blocks is stacked vertically */
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 20px;
     text-align: center;
-    transition: all 0.5s ease-out; /* Smooth transitions */
-    border-radius: 25px; /* Default rounded borders */
-    box-sizing: border-box; /* Include padding in element's total width/height */
+    transition: all 0.5s ease-out; 
+    border-radius: 25px; 
+    box-sizing: border-box; 
 }
 
-/* Specific styles for the left block (menu) - Desktop default (hidden) */
+
 .left-block {
     background-color: #add8e6;
     color: #2c3e50;
-    /* Hidden by default on desktop */
     width: 0;
     overflow: hidden;
     padding: 0;
     opacity: 0;
-    flex-shrink: 0; /* Prevents shrinking */
-    /* Remove specific border radius on hidden state */
+    flex-shrink: 0; 
+
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
 
-/* Specific styles for the right block (main content) - Desktop default (full width) */
 .right-block {
-    flex: 1; /* Takes all available space when left-block is hidden */
+    flex: 1; 
     background-image: radial-gradient(circle at 50% 50%, white 10%, #87ceeb 60%, #4682b4 100%);
     color: #2c3e50;
-    /* Ensure right block maintains its rounded corners when left block is hidden */
+
     border-radius: 25px;
 }
 
-/* DESKTOP VIEW: When left-block is visible (min-width: 769px) */
 @media (min-width: 769px) {
     .container {
-        flex-direction: row; /* Side-by-side layout on desktop */
+        flex-direction: row; 
     }
 
     .left-block.visible {
-        width: 50%; /* Takes 50% width */
-        padding: 20px; /* Restores padding */
-        opacity: 1; /* Becomes visible */
-        /* Specific border-radius for desktop split view */
+        width: 50%; 
+        padding: 20px; 
+        opacity: 1; 
+
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
         border-top-left-radius: 25px;
@@ -74,11 +70,11 @@ body {
     }
 
     .left-block.visible + .right-block {
-        width: 50%; /* Right block also takes 50% */
-        background-image: none; /* No gradient */
-        background-color: #add8e6; /* Solid color matching left block */
+        width: 50%; 
+        background-image: none; 
+        background-color: #add8e6; 
         color: #2c3e50;
-        /* Adjust borders for desktop split view */
+
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
         border-top-right-radius: 25px;
@@ -86,12 +82,11 @@ body {
     }
 
     .main-title {
-        white-space: nowrap; /* Keep on one line for desktop */
+        white-space: nowrap; 
     }
 }
 
 
-/* --- Menu and List Styles (General for both views) --- */
 .menu-title {
     font-size: 1.7em;
     margin-bottom: 25px;
@@ -114,7 +109,7 @@ body {
     color: #0056b3;
 }
 
-/* --- Main Title Styles (General for both views) --- */
+
 .main-title {
     color: #2c3e50;
     font-size: 3.5em;
@@ -126,7 +121,6 @@ body {
     text-shadow: none;
 }
 
-/* --- Bear and Button Styles (General for both views) --- */
 .bear-container {
     margin-bottom: 40px;
 }
@@ -152,7 +146,7 @@ body {
     transform: scale(1.05);
 }
 
-/* --- Modal Styles (General for both views) --- */
+
 .modal {
     display: none;
     position: fixed;
@@ -230,7 +224,6 @@ body {
     transform: scale(1.05);
 }
 
-/* --- Title Animation Styles --- */
 .animated-title span {
     display: inline-block;
     position: relative;
@@ -266,71 +259,64 @@ body {
     100% { opacity: 1; transform: translateY(0); }
 }
 
-/* ********** MEDIA QUERIES PARA MÓVILES (max-width: 768px) ********** */
 @media (max-width: 768px) {
     .container {
-        flex-direction: column; /* Stack blocks vertically on mobile */
-        height: auto; /* Auto height for stacking */
+        flex-direction: column; 
+        height: auto; 
         width: 98%;
         margin: 10px auto;
-        border-radius: 15px; /* Smaller container border radius */
+        border-radius: 15px; 
     }
 
     .left-block, .right-block {
-        width: 100%; /* Both blocks take full width on mobile */
+        width: 100%; 
         height: auto;
         padding: 15px;
-        border-radius: 15px; /* Consistent border radius */
-        margin-bottom: 0; /* No default margin between stacked blocks */
+        border-radius: 15px; 
+        margin-bottom: 0; 
     }
 
-    /* MOBILE: Left block (menu) default state - completely hidden */
     .left-block {
-        order: 1; /* Menu appears first */
-        opacity: 0; /* Hidden */
-        height: 0; /* Takes no height */
-        padding: 0; /* No padding */
-        pointer-events: none; /* Not clickable when hidden */
-        overflow: hidden; /* Hide content */
-        margin-bottom: 0; /* No space below when hidden */
-        /* Ensure all border-radius are 15px initially for a consistent mobile block look */
+        order: 1; 
+        opacity: 0; 
+        height: 0; 
+        padding: 0; 
+        pointer-events: none;
+        overflow: hidden; 
+        margin-bottom: 0; 
+
         border-radius: 15px;
     }
 
-    /* MOBILE: Right block (main content) default state */
     .right-block {
-        order: 2; /* Main content appears second */
+        order: 2; 
         background-image: radial-gradient(circle at 50% 50%, white 10%, #87ceeb 60%, #4682b4 100%); /* Original gradient */
-        border-radius: 15px; /* Consistent border radius */
-        /* No margin-bottom here initially, as the left-block will add its own margin when visible */
-        margin-top: 0; /* Ensure no unwanted margin above */
+        border-radius: 15px; 
+
+        margin-top: 0; 
     }
 
-    /* MOBILE: When left-block (menu) is visible */
     .left-block.visible {
-        opacity: 1; /* Visible */
-        height: auto; /* Takes natural height */
-        padding: 20px; /* Restores padding */
-        pointer-events: auto; /* Clickable */
-        border-radius: 15px; /* Ensure all corners are rounded when visible */
-        margin-bottom: 10px; /* Space below the menu when it's visible, pushing content down */
+        opacity: 1; 
+        height: auto; 
+        padding: 20px; 
+        pointer-events: auto; 
+        border-radius: 15px; 
+        margin-bottom: 10px; 
     }
 
-    /* MOBILE: When left-block is visible, the right-block adjusts */
     .left-block.visible + .right-block {
-        background-image: none; /* Remove gradient */
-        background-color: #add8e6; /* Solid color */
+        background-image: none; 
+        background-color: #add8e6; 
         color: #2c3e50;
-        border-radius: 15px; /* Ensure all corners are rounded */
-        margin-top: 0; /* No extra space between visible menu and this block */
+        border-radius: 15px; 
+        margin-top: 0; 
     }
 
-
-    /* Adjust font sizes and margins for mobile */
     .main-title {
-        font-size: 2.2em; /* Smaller title */
-        white-space: normal; /* Allow title to wrap */
-        word-break: break-word; /* Break long words */
+        font-size: 2.2em; 
+        white-space: normal; 
+        word-break: break-word; 
         line-height: 1.2;
         margin-top: 10px;
         margin-bottom: 10px;
@@ -346,17 +332,17 @@ body {
     }
 
     .animated-bear {
-        width: 150px; /* Smaller bear */
+        width: 150px; 
         margin-bottom: 15px;
     }
 
     .feeling-button {
-        padding: 10px 20px; /* Smaller button */
+        padding: 10px 20px; 
         font-size: 1em;
     }
 
     .modal-content {
-        max-width: 90%; /* Modal takes more width */
+        max-width: 90%; 
         padding: 15px;
     }
 
@@ -376,7 +362,6 @@ body {
 }
 
 @media (max-width: 480px) {
-    /* Further adjustments for very small phones */
     .main-title {
         font-size: 1.8em;
     }
