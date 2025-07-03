@@ -10,58 +10,66 @@ body {
 }
 
 .container {
-    display: flex;
+    display: flex; /* Flex container for the two blocks */
     width: 95%;
     max-width: 1200px;
-    height: 90vh;
+    height: 90vh; /* Fixed height for desktop */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     border-radius: 25px;
-    overflow: hidden;
+    overflow: hidden; /* Important for preventing content overflow during transitions */
 }
 
 /* Base styles for both blocks */
 .left-block, .right-block {
     display: flex;
-    flex-direction: column; /* Default to column for content centering */
+    flex-direction: column; /* Content inside blocks is stacked vertically */
     justify-content: center;
     align-items: center;
     padding: 20px;
     text-align: center;
-    transition: all 0.5s ease-out; /* Smooth transitions for all properties */
+    transition: all 0.5s ease-out; /* Smooth transitions */
     border-radius: 25px; /* Default rounded borders */
     box-sizing: border-box; /* Include padding in element's total width/height */
 }
 
-/* Specific styles for the left block (menu) - Desktop state by default (hidden) */
+/* Specific styles for the left block (menu) - Desktop default (hidden) */
 .left-block {
     background-color: #add8e6;
     color: #2c3e50;
-    width: 0; /* Hidden by default on desktop */
+    /* Hidden by default on desktop */
+    width: 0;
     overflow: hidden;
-    padding: 0; /* No padding when hidden */
-    opacity: 0; /* Fully transparent when hidden */
-    flex-shrink: 0; /* Prevents shrinking beyond content */
+    padding: 0;
+    opacity: 0;
+    flex-shrink: 0; /* Prevents shrinking */
+    /* Remove specific border radius on hidden state */
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
 
-/* Specific styles for the right block (main content) - Desktop state by default */
+/* Specific styles for the right block (main content) - Desktop default (full width) */
 .right-block {
     flex: 1; /* Takes all available space when left-block is hidden */
     background-image: radial-gradient(circle at 50% 50%, white 10%, #87ceeb 60%, #4682b4 100%);
     color: #2c3e50;
+    /* Ensure right block maintains its rounded corners when left block is hidden */
+    border-radius: 25px;
 }
 
-/* DESKTOP VIEW: When left-block is visible */
-@media (min-width: 769px) { /* Apply these styles only on screens larger than 768px */
+/* DESKTOP VIEW: When left-block is visible (min-width: 769px) */
+@media (min-width: 769px) {
+    .container {
+        flex-direction: row; /* Side-by-side layout on desktop */
+    }
+
     .left-block.visible {
         width: 50%; /* Takes 50% width */
         padding: 20px; /* Restores padding */
         opacity: 1; /* Becomes visible */
-        /* Restore specific border-radius for desktop split view */
+        /* Specific border-radius for desktop split view */
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
-        border-top-left-radius: 25px; /* Ensure these are still rounded */
+        border-top-left-radius: 25px;
         border-bottom-left-radius: 25px;
     }
 
@@ -73,18 +81,17 @@ body {
         /* Adjust borders for desktop split view */
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
-        border-top-right-radius: 25px; /* Ensure these are still rounded */
+        border-top-right-radius: 25px;
         border-bottom-right-radius: 25px;
     }
 
-    /* Ensure main-title is nowrap on desktop */
     .main-title {
-        white-space: nowrap;
+        white-space: nowrap; /* Keep on one line for desktop */
     }
 }
 
 
-/* --- Menu and List Styles --- */
+/* --- Menu and List Styles (General for both views) --- */
 .menu-title {
     font-size: 1.7em;
     margin-bottom: 25px;
@@ -107,7 +114,7 @@ body {
     color: #0056b3;
 }
 
-/* --- Main Title Styles --- */
+/* --- Main Title Styles (General for both views) --- */
 .main-title {
     color: #2c3e50;
     font-size: 3.5em;
@@ -119,7 +126,7 @@ body {
     text-shadow: none;
 }
 
-/* --- Bear and Button Styles --- */
+/* --- Bear and Button Styles (General for both views) --- */
 .bear-container {
     margin-bottom: 40px;
 }
@@ -145,7 +152,7 @@ body {
     transform: scale(1.05);
 }
 
-/* --- Modal Styles --- */
+/* --- Modal Styles (General for both views) --- */
 .modal {
     display: none;
     position: fixed;
@@ -154,7 +161,6 @@ body {
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
     background-color: rgba(0, 0, 0, 0.6);
     justify-content: center;
     align-items: center;
@@ -162,7 +168,6 @@ body {
 
 .modal-content {
     background-color: #add8e6;
-    margin: auto;
     padding: 30px;
     border-radius: 25px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
@@ -264,7 +269,7 @@ body {
 /* ********** MEDIA QUERIES PARA MÓVILES (max-width: 768px) ********** */
 @media (max-width: 768px) {
     .container {
-        flex-direction: column; /* Stack blocks vertically */
+        flex-direction: column; /* Stack blocks vertically on mobile */
         height: auto; /* Auto height for stacking */
         width: 98%;
         margin: 10px auto;
@@ -279,7 +284,7 @@ body {
         margin-bottom: 0; /* No default margin between stacked blocks */
     }
 
-    /* MOBILE: Left block (menu) default state */
+    /* MOBILE: Left block (menu) default state - completely hidden */
     .left-block {
         order: 1; /* Menu appears first */
         opacity: 0; /* Hidden */
@@ -287,9 +292,9 @@ body {
         padding: 0; /* No padding */
         pointer-events: none; /* Not clickable when hidden */
         overflow: hidden; /* Hide content */
-        /* Reset border radius for mobile */
+        margin-bottom: 0; /* No space below when hidden */
+        /* Ensure all border-radius are 15px initially for a consistent mobile block look */
         border-radius: 15px;
-        margin-bottom: 0; /* Ensure no unwanted margin */
     }
 
     /* MOBILE: Right block (main content) default state */
@@ -297,7 +302,8 @@ body {
         order: 2; /* Main content appears second */
         background-image: radial-gradient(circle at 50% 50%, white 10%, #87ceeb 60%, #4682b4 100%); /* Original gradient */
         border-radius: 15px; /* Consistent border radius */
-        margin-bottom: 10px; /* Add some space above the main content block if menu is visible above it */
+        /* No margin-bottom here initially, as the left-block will add its own margin when visible */
+        margin-top: 0; /* Ensure no unwanted margin above */
     }
 
     /* MOBILE: When left-block (menu) is visible */
@@ -306,19 +312,17 @@ body {
         height: auto; /* Takes natural height */
         padding: 20px; /* Restores padding */
         pointer-events: auto; /* Clickable */
-        /* Reset border-radius for when it's the visible block */
-        border-radius: 15px;
-        margin-bottom: 10px; /* Space below the menu when it's visible */
+        border-radius: 15px; /* Ensure all corners are rounded when visible */
+        margin-bottom: 10px; /* Space below the menu when it's visible, pushing content down */
     }
 
     /* MOBILE: When left-block is visible, the right-block adjusts */
     .left-block.visible + .right-block {
-        /* When menu is visible, right block can have different styles */
         background-image: none; /* Remove gradient */
         background-color: #add8e6; /* Solid color */
         color: #2c3e50;
         border-radius: 15px; /* Ensure all corners are rounded */
-        margin-top: 0; /* Ensure no extra space if the menu is now above it */
+        margin-top: 0; /* No extra space between visible menu and this block */
     }
 
 
