@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para que me recuerdes</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="left-block">
+            <h2 class="menu-title">Elige cómo te sientes:</h2>
+            <ul class="options-list">
+                <li>- Estoy feliz</li>
+                <li>- Estoy triste</li>
+                <li>- Estoy bajoneada</li>
+                <li>- Estoy frustrada</li>
+                <li>- No sé cómo me siento</li>
+            </ul>
+        </div>
+        <div class="right-block">
+            <h1 class="main-title animated-title">
+                <span>P</span><span>a</span><span>r</span><span>a</span>
+                <span> </span>
+                <span>q</span><span>u</span><span>e</span>
+                <span> </span>
+                <span>m</span><span>e</span>
+                <span> </span>
+                <span>r</span><span>e</span><span>c</span><span>u</span><span>e</span><span>r</span><span>d</span><span>e</span><span>s</span>
+            </h1>
+            <div class="bear-container">
+                <img src="img/img1.gif" alt="Osito saltando y lanzando corazones" class="animated-bear">
+            </div>
+            <button class="feeling-button">¿Cómo te sientes hoy?</button>
+        </div>
+    </div>
+
+    <div id="feelingModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 class="modal-message">Me alegro mucho mi vida, me encanta saber que estás feliz <3</h2>
+            <div class="modal-gif-container">
+                <img src="img/img2.gif" alt="Gif de reacción" class="modal-gif">
+            </div>
+            <button class="modal-close-btn">Cerrar</button>
+        </div>
+    </div>
+
+    <div id="feelingSadModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 class="modal-message">Esta bien estar triste, sabes que puedes abrazarme cuando lo estes... <3</h2>
+            <div class="modal-gif-container">
+                <img src="img/img3.gif" alt="Gif de consuelo" class="modal-gif">
+            </div>
+            <h3>Estoy contigo...</h3>
+            <button class="modal-close-btn">Cerrar</button>
+        </div>
+    </div>
+    <div id="feelingDownModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 class="modal-message">Mi niña bella tranquila, solo respira, búscame y cuéntame qué pasa por esa cabecita...</h2>
+            <div class="modal-gif-container">
+                <img src="img/img4.gif" alt="Gif de apoyo" class="modal-gif">
+            </div>
+            <button class="modal-close-btn">Cerrar</button>
+        </div>
+    </div>
+        <div id="feelingFrustratedModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 class="modal-message">Puedes sentirte frustrada pero recuerda, que siempre logras calmarte y lograr buscarle soluciones, ánimo &lt;3</h2>
+            <div class="modal-gif-container">
+                <img src="img/img5.gif" alt="Gif de ánimo" class="modal-gif">
+            </div>
+            <button class="modal-close-btn">Cerrar</button>
+        </div>
+    </div>
+        <div id="feelingUnsureModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 class="modal-message">¿No sabes cómo te sientes? Yo sé cómo me siento y es... "¡MUY ENAMORADA DE TI!"</h2>
+            <div class="modal-gif-container">
+                <img src="img/img6.gif" alt="Gif de enamorada" class="modal-gif">
+            </div>
+            <button class="modal-close-btn">Cerrar</button>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>

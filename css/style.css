@@ -1,0 +1,278 @@
+body {
+    /* Fondo con un gradiente de azul claro */
+    background: linear-gradient(to right, #e0f2f7, #c1e0e9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    
+    /* ********** CAMBIO AQUÍ: Fuente para TODO el texto del body ********** */
+    font-family: 'Dancing Script', cursive; /* Usamos 'cursive' como respaldo genérico */
+    /* Color de texto por defecto para el contenido general (menú, etc.) */
+    color: #2c3e50; /* Azul oscuro para que coincida con la imagen */
+    /* ********************************************************************** */
+}
+
+.container {
+    display: flex;
+    width: 95%; /* Aumentamos el ancho del contenedor */
+    max-width: 1200px; /* Añadimos un ancho máximo opcional */
+    height: 90vh; /* Aumentamos la altura del contenedor */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+    border-radius: 25px; /* Bordes más redondeados para el contenedor principal */
+    overflow: hidden;
+}
+
+/* Estilos base para ambos bloques para centrar su contenido */
+.left-block, .right-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+    transition: width 0.5s ease-out, padding 0.5s ease-out, opacity 0.5s ease-out, background-color 0.5s ease-out; /* Añadimos transición para background-color */
+    border-radius: 25px; /* Bordes redondeados por defecto para ambos, si no hay otro específico */
+}
+
+/* Estilos específicos para el bloque izquierdo (oculto por defecto) */
+.left-block {
+    background-color: #add8e6; /* Azul claro para el estado visible */
+    color: #333;
+    width: 0; /* Empieza con ancho 0 */
+    overflow: hidden;
+    padding: 0; /* Quita el padding inicial */
+    opacity: 0; /* Lo hace invisible */
+    flex-shrink: 0; /* Evita que se encoja más de lo necesario */
+    /* Bordes para cuando el contenedor tiene ambos bloques */
+    border-top-right-radius: 0; /* Quitamos redondez superior derecha */
+    border-bottom-right-radius: 0; /* Quitamos redondez inferior derecha */
+}
+
+/* Estilos para el bloque izquierdo cuando está visible */
+.left-block.visible {
+    width: 50%; /* Cuando esté visible, ocupa la mitad del ancho del contenedor */
+    padding: 20px; /* Restaura el padding */
+    opacity: 1; /* Lo hace visible */
+}
+
+/* Estilos para el bloque derecho */
+.right-block {
+    flex: 1; /* Permite que el bloque derecho se expanda para llenar el espacio */
+    background-image: radial-gradient(circle at 50% 50%, white 10%, #87ceeb 60%, #4682b4 100%); /* Degradado inicial */
+    color: white; /* Color del texto inicial para el right-block */
+    /* Bordes para cuando el contenedor tiene solo el right-block */
+    border-radius: 25px; /* Bordes redondeados cuando es el único visible */
+}
+
+/* IMPORTANTE: Cuando left-block es visible, right-block también cambia */
+.left-block.visible + .right-block {
+    width: 50%; /* Cuando left-block está visible, right-block toma el 50% */
+    background-image: none; /* Quitamos el degradado */
+    background-color: #add8e6; /* Color sólido igual al left-block */
+    color: #333; /* Cambiamos el color del texto para que contraste con el nuevo fondo */
+
+    /* Quitamos redondez superior izquierda y inferior izquierda */
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+
+/* --- Estilos del menú de opciones --- */
+.menu-title {
+    font-size: 1.7em; /* Un poco más grande */
+    margin-bottom: 25px;
+    color: #2c3e50; /* Azul oscuro para el título del menú */
+}
+
+.options-list {
+    list-style: none; /* Quita los puntos de la lista */
+    padding: 0;
+    font-size: 1.2em;
+}
+
+.options-list li {
+    margin-bottom: 12px;
+    cursor: pointer; /* Indica que son elementos clicables */
+    transition: color 0.3s ease;
+}
+
+.options-list li:hover {
+    color: #0056b3; /* Cambia de color al pasar el ratón */
+}
+
+/* ********** ESTILOS PARA EL TÍTULO PRINCIPAL (PARA QUE ME RECUERDES) ********** */
+/* NOTA: Ya no es necesario poner font-family aquí, porque lo hereda del body.
+   Solo mantén las propiedades específicas del título como color, tamaño y peso. */
+.main-title {
+    /* El font-family ya lo hereda del body ahora */
+    color: #1b2083; /* Un gris muy claro, casi blanco, para el título */
+    font-size: 3em; /* Ajusta el tamaño para que se vea bien */
+    font-weight: normal; /* "Manufacturing Consent" solo tiene peso normal (400) */
+    text-align: center;
+    white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
+    max-width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-shadow: none; /* Asegúrate de que no tenga sombra si no la quieres */
+}
+/* ******************************************************************************** */
+
+/* --- Estilos para el contenedor del oso y el botón --- */
+.bear-container {
+    margin-bottom: 40px;
+}
+
+.animated-bear {
+    width: 300px; /* Tamaño del GIF del osito */
+    height: auto;
+}
+
+.feeling-button {
+    background-color: #1b2083; /* Rojo tomate, un contraste llamativo */
+    color: white;
+    border: none;
+    padding: 18px 35px; /* Botón más grande */
+    font-size: 1.4em;
+    border-radius: 30px; /* Bordes más redondeados */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.feeling-button:hover {
+    background-color: #5f62ab;
+    transform: scale(1.05); /* Ligeramente más grande al pasar el ratón */
+}
+
+/* ********** ESTILOS DEL MODAL ********** */
+.modal {
+    display: none; /* ¡Deja SOLO esta línea para ocultarlo por defecto! */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center; /* Estas dos líneas ayudan a centrar el modal-content */
+    align-items: center;    /* cuando el display se cambie a 'flex' en JS */
+}
+
+.modal-content {
+    background-color: #add8e6;
+    margin: auto; /* Esto también ayuda a centrar */
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.close-button {
+    color: #555;
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #000;
+    text-decoration: none;
+}
+
+.modal-message {
+    font-size: 1.8em;
+    color: #2c3e50; /* Color del texto del modal para que contraste */
+    margin-bottom: 25px;
+}
+
+.modal-gif-container {
+    margin-bottom: 25px;
+}
+
+.modal-gif {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+}
+
+.modal-close-btn {
+    background-color: #ff6347;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.modal-close-btn:hover {
+    background-color: #e5533d;
+    transform: scale(1.05);
+}
+/* ************************************************ */
+
+/* --- Estilos para la animación de caída del título --- */
+
+/* Es importante que los span sean inline-block para que las transformaciones funcionen bien */
+.animated-title span {
+    display: inline-block;
+    position: relative;
+    opacity: 0; /* Oculto por defecto antes de la animación */
+    transform: translateY(-50px); /* Posición inicial "arriba" para que caiga */
+    animation: dropIn 0.8s forwards ease-out; /* Animación de caída */
+    /* Puedes ajustar la duración y la curva de aceleración */
+}
+
+/* Define el retraso para cada letra */
+.animated-title span:nth-child(1) { animation-delay: 0.1s; }
+.animated-title span:nth-child(2) { animation-delay: 0.15s; }
+.animated-title span:nth-child(3) { animation-delay: 0.2s; }
+.animated-title span:nth-child(4) { animation-delay: 0.25s; }
+/* Espacio */
+.animated-title span:nth-child(5) { animation-delay: 0.3s; }
+.animated-title span:nth-child(6) { animation-delay: 0.35s; }
+.animated-title span:nth-child(7) { animation-delay: 0.4s; }
+.animated-title span:nth-child(8) { animation-delay: 0.45s; }
+/* Espacio */
+.animated-title span:nth-child(9) { animation-delay: 0.5s; }
+.animated-title span:nth-child(10) { animation-delay: 0.55s; }
+.animated-title span:nth-child(11) { animation-delay: 0.6s; }
+/* Espacio */
+.animated-title span:nth-child(12) { animation-delay: 0.65s; }
+.animated-title span:nth-child(13) { animation-delay: 0.7s; }
+.animated-title span:nth-child(14) { animation-delay: 0.75s; }
+.animated-title span:nth-child(15) { animation-delay: 0.8s; }
+.animated-title span:nth-child(16) { animation-delay: 0.85s; }
+.animated-title span:nth-child(17) { animation-delay: 0.9s; }
+.animated-title span:nth-child(18) { animation-delay: 0.95s; }
+.animated-title span:nth-child(19) { animation-delay: 1.0s; }
+.animated-title span:nth-child(20) { animation-delay: 1.05s; }
+.animated-title span:nth-child(21) { animation-delay: 1.1s; }
+
+
+/* Keyframes para la animación de "caída" */
+@keyframes dropIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px); /* Inicia 50px arriba */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); /* Termina en su posición normal */
+    }
+}
