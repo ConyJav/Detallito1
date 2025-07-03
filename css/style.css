@@ -6,11 +6,11 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    
-    /* ********** CAMBIO AQUÍ: Fuente para TODO el texto del body ********** */
+
+    /* ********** FUENTE: Dancing Script para todo el body ********** */
     font-family: 'Dancing Script', cursive; /* Usamos 'cursive' como respaldo genérico */
     /* Color de texto por defecto para el contenido general (menú, etc.) */
-    color: #2c3e50; /* Azul oscuro para que coincida con la imagen */
+    color: #2c3e50; /* Azul oscuro para que coincida con la imagen de referencia */
     /* ********************************************************************** */
 }
 
@@ -39,7 +39,7 @@ body {
 /* Estilos específicos para el bloque izquierdo (oculto por defecto) */
 .left-block {
     background-color: #add8e6; /* Azul claro para el estado visible */
-    color: #333;
+    color: #2c3e50; /* Cambiamos a azul oscuro para el texto del menú, como en la imagen de referencia */
     width: 0; /* Empieza con ancho 0 */
     overflow: hidden;
     padding: 0; /* Quita el padding inicial */
@@ -61,7 +61,7 @@ body {
 .right-block {
     flex: 1; /* Permite que el bloque derecho se expanda para llenar el espacio */
     background-image: radial-gradient(circle at 50% 50%, white 10%, #87ceeb 60%, #4682b4 100%); /* Degradado inicial */
-    color: white; /* Color del texto inicial para el right-block */
+    color: #2c3e50; /* Color del texto inicial para el right-block para que coincida con la imagen de referencia */
     /* Bordes para cuando el contenedor tiene solo el right-block */
     border-radius: 25px; /* Bordes redondeados cuando es el único visible */
 }
@@ -71,19 +71,18 @@ body {
     width: 50%; /* Cuando left-block está visible, right-block toma el 50% */
     background-image: none; /* Quitamos el degradado */
     background-color: #add8e6; /* Color sólido igual al left-block */
-    color: #333; /* Cambiamos el color del texto para que contraste con el nuevo fondo */
+    color: #2c3e50; /* Cambiamos el color del texto para que contraste con el nuevo fondo */
 
     /* Quitamos redondez superior izquierda y inferior izquierda */
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
 
-
 /* --- Estilos del menú de opciones --- */
 .menu-title {
     font-size: 1.7em; /* Un poco más grande */
     margin-bottom: 25px;
-    color: #2c3e50; /* Azul oscuro para el título del menú */
+    color: #2c3e50; /* Azul oscuro para el título del menú, como en la imagen de referencia */
 }
 
 .options-list {
@@ -103,13 +102,11 @@ body {
 }
 
 /* ********** ESTILOS PARA EL TÍTULO PRINCIPAL (PARA QUE ME RECUERDES) ********** */
-/* NOTA: Ya no es necesario poner font-family aquí, porque lo hereda del body.
-   Solo mantén las propiedades específicas del título como color, tamaño y peso. */
+/* NOTA: Ahora el font-family lo hereda del body. */
 .main-title {
-    /* El font-family ya lo hereda del body ahora */
-    color: #1b2083; /* Un gris muy claro, casi blanco, para el título */
-    font-size: 3em; /* Ajusta el tamaño para que se vea bien */
-    font-weight: normal; /* "Manufacturing Consent" solo tiene peso normal (400) */
+    color: #2c3e50; /* Azul oscuro para el título, como en la imagen de referencia */
+    font-size: 3.5em; /* Aumentamos un poco el tamaño para un mejor impacto visual, ajústalo si es necesario */
+    font-weight: normal; /* Dancing Script tiene pesos de 400 a 700, pero el 400 es el más caligráfico */
     text-align: center;
     white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
     max-width: 100%;
@@ -130,7 +127,7 @@ body {
 }
 
 .feeling-button {
-    background-color: #1b2083; /* Rojo tomate, un contraste llamativo */
+    background-color: #ff6347; /* Rojo tomate, un contraste llamativo */
     color: white;
     border: none;
     padding: 18px 35px; /* Botón más grande */
@@ -141,7 +138,7 @@ body {
 }
 
 .feeling-button:hover {
-    background-color: #5f62ab;
+    background-color: #e5533d;
     transform: scale(1.05); /* Ligeramente más grande al pasar el ratón */
 }
 
@@ -274,5 +271,120 @@ body {
     100% {
         opacity: 1;
         transform: translateY(0); /* Termina en su posición normal */
+    }
+}
+
+
+/* ********** MEDIA QUERIES PARA ADAPTARSE A PANTALLAS MÁS PEQUEÑAS (CELULARES) ********** */
+
+@media (max-width: 768px) {
+    /* Estilos que se aplicarán en pantallas de 768px o menos (tablets y celulares) */
+
+    .container {
+        flex-direction: column; /* Cambia la dirección de los bloques a columna */
+        height: auto; /* Permite que la altura del contenedor se ajuste al contenido */
+        width: 98%; /* Ocupa casi todo el ancho disponible */
+        margin: 10px auto; /* Centra el contenedor con un poco de margen */
+    }
+
+    .left-block, .right-block {
+        width: 100% !important; /* Ambos bloques ocupan el 100% del ancho */
+        height: auto; /* La altura se ajusta al contenido */
+        padding: 15px; /* Reduce un poco el padding */
+        border-radius: 15px; /* Ajusta los bordes redondeados */
+    }
+
+    .left-block {
+        opacity: 1; /* Asegura que siempre esté visible en móviles si no hay JS para ocultarlo */
+        padding: 20px; /* Asegura padding para el contenido */
+    }
+
+    .left-block.visible {
+        /* Si el left-block está visible, no queremos que el right-block se encoja, sino que esté debajo */
+        width: 100%;
+    }
+
+    .left-block.visible + .right-block {
+        width: 100%; /* El right-block también al 100% */
+        margin-top: 20px; /* Añade un espacio entre los dos bloques */
+        background-color: #add8e6; /* Mantiene el color azul claro */
+        color: #2c3e50; /* Mantiene el color de texto */
+        border-top-left-radius: 15px; /* Restaura los bordes redondeados */
+        border-top-right-radius: 15px;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+    }
+
+    .main-title {
+        font-size: 2.5em; /* Reduce el tamaño del título principal */
+        white-space: normal; /* Permite que el texto se divida en varias líneas si es muy largo */
+        word-break: break-word; /* Asegura que palabras largas se rompan */
+        line-height: 1.2; /* Ajusta el espaciado entre líneas */
+    }
+
+    .menu-title {
+        font-size: 1.5em; /* Reduce el tamaño del título del menú */
+    }
+
+    .options-list {
+        font-size: 1.1em; /* Reduce el tamaño de las opciones de la lista */
+    }
+
+    .animated-bear {
+        width: 200px; /* Reduce el tamaño del oso en pantallas pequeñas */
+        margin-bottom: 20px; /* Ajusta el margen */
+    }
+
+    .feeling-button {
+        padding: 15px 30px; /* Reduce el tamaño del botón */
+        font-size: 1.2em;
+    }
+
+    /* Estilos para el modal en pantallas pequeñas */
+    .modal-content {
+        max-width: 90%; /* El modal ocupa más ancho */
+        padding: 20px; /* Reduce el padding del modal */
+    }
+
+    .modal-message {
+        font-size: 1.5em; /* Reduce el tamaño del mensaje del modal */
+    }
+
+    .modal-gif {
+        width: 150px; /* Reduce el tamaño del GIF dentro del modal */
+        height: auto;
+    }
+
+    .modal-close-btn {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Estilos adicionales para pantallas muy pequeñas (smartphones) */
+    .main-title {
+        font-size: 2em; /* Reduce aún más el título principal */
+    }
+
+    .menu-title {
+        font-size: 1.3em;
+    }
+
+    .options-list {
+        font-size: 1em;
+    }
+
+    .animated-bear {
+        width: 150px; /* Oso aún más pequeño */
+    }
+
+    .feeling-button {
+        font-size: 1.1em;
+        padding: 12px 25px;
+    }
+
+    .modal-message {
+        font-size: 1.2em;
     }
 }
